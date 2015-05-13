@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		B878E8111B03F5D8006C804E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B878E8101B03F5D8006C804E /* main.m */; };
 		B878E8141B03F5D8006C804E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B878E8131B03F5D8006C804E /* AppDelegate.m */; };
-		B878E8171B03F5D8006C804E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B878E8161B03F5D8006C804E /* ViewController.m */; };
 		B878E81A1B03F5D8006C804E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B878E8181B03F5D8006C804E /* Main.storyboard */; };
 		B878E81C1B03F5D8006C804E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B878E81B1B03F5D8006C804E /* Images.xcassets */; };
 		B878E81F1B03F5D8006C804E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B878E81D1B03F5D8006C804E /* LaunchScreen.xib */; };
 		B878E82B1B03F5D8006C804E /* GeoFencingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B878E82A1B03F5D8006C804E /* GeoFencingTests.m */; };
+		B878E8361B03F784006C804E /* setCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = B878E8351B03F784006C804E /* setCoordinate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +32,14 @@
 		B878E8101B03F5D8006C804E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B878E8121B03F5D8006C804E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B878E8131B03F5D8006C804E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B878E8151B03F5D8006C804E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B878E8161B03F5D8006C804E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		B878E8191B03F5D8006C804E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B878E81B1B03F5D8006C804E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B878E81E1B03F5D8006C804E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B878E8241B03F5D8006C804E /* GeoFencingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeoFencingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B878E8291B03F5D8006C804E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B878E82A1B03F5D8006C804E /* GeoFencingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoFencingTests.m; sourceTree = "<group>"; };
+		B878E8341B03F784006C804E /* setCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setCoordinate.h; sourceTree = "<group>"; };
+		B878E8351B03F784006C804E /* setCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = setCoordinate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +83,8 @@
 			children = (
 				B878E8121B03F5D8006C804E /* AppDelegate.h */,
 				B878E8131B03F5D8006C804E /* AppDelegate.m */,
-				B878E8151B03F5D8006C804E /* ViewController.h */,
-				B878E8161B03F5D8006C804E /* ViewController.m */,
+				B878E8341B03F784006C804E /* setCoordinate.h */,
+				B878E8351B03F784006C804E /* setCoordinate.m */,
 				B878E8181B03F5D8006C804E /* Main.storyboard */,
 				B878E81B1B03F5D8006C804E /* Images.xcassets */,
 				B878E81D1B03F5D8006C804E /* LaunchScreen.xib */,
@@ -219,8 +219,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B878E8171B03F5D8006C804E /* ViewController.m in Sources */,
 				B878E8141B03F5D8006C804E /* AppDelegate.m in Sources */,
+				B878E8361B03F784006C804E /* setCoordinate.m in Sources */,
 				B878E8111B03F5D8006C804E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

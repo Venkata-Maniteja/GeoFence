@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  setCoordinate.h
 //  GeoFencing
 //
 //  Created by Venkata Maniteja on 2015-05-13.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface setCoordinate : UIViewController
 
 @end
-
