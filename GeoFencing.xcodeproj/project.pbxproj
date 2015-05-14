@@ -14,6 +14,14 @@
 		B878E81F1B03F5D8006C804E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B878E81D1B03F5D8006C804E /* LaunchScreen.xib */; };
 		B878E82B1B03F5D8006C804E /* GeoFencingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B878E82A1B03F5D8006C804E /* GeoFencingTests.m */; };
 		B878E8361B03F784006C804E /* setCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = B878E8351B03F784006C804E /* setCoordinate.m */; };
+		B878E8381B03FD10006C804E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B878E8371B03FD10006C804E /* CoreLocation.framework */; };
+		B878E83B1B040CF6006C804E /* checkCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = B878E83A1B040CF6006C804E /* checkCoord.m */; };
+		B878E83D1B041260006C804E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B878E83C1B041260006C804E /* MapKit.framework */; };
+		B878E8441B04230B006C804E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B878E8431B04230B006C804E /* QuartzCore.framework */; };
+		B878E8491B0529F4006C804E /* redCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = B878E8481B0529F4006C804E /* redCircle.png */; };
+		B878E84C1B052A98006C804E /* animatedCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = B878E84B1B052A98006C804E /* animatedCircle.m */; };
+		B878E84E1B05459F006C804E /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B878E84D1B05459F006C804E /* libsqlite3.0.dylib */; };
+		B878E8511B0547C4006C804E /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = B878E8501B0547C4006C804E /* History.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +48,17 @@
 		B878E82A1B03F5D8006C804E /* GeoFencingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeoFencingTests.m; sourceTree = "<group>"; };
 		B878E8341B03F784006C804E /* setCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setCoordinate.h; sourceTree = "<group>"; };
 		B878E8351B03F784006C804E /* setCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = setCoordinate.m; sourceTree = "<group>"; };
+		B878E8371B03FD10006C804E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B878E8391B040CF6006C804E /* checkCoord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = checkCoord.h; sourceTree = "<group>"; };
+		B878E83A1B040CF6006C804E /* checkCoord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = checkCoord.m; sourceTree = "<group>"; };
+		B878E83C1B041260006C804E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B878E8431B04230B006C804E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B878E8481B0529F4006C804E /* redCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redCircle.png; sourceTree = "<group>"; };
+		B878E84A1B052A98006C804E /* animatedCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animatedCircle.h; sourceTree = "<group>"; };
+		B878E84B1B052A98006C804E /* animatedCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = animatedCircle.m; sourceTree = "<group>"; };
+		B878E84D1B05459F006C804E /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		B878E84F1B0547C4006C804E /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
+		B878E8501B0547C4006C804E /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +66,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B878E84E1B05459F006C804E /* libsqlite3.0.dylib in Frameworks */,
+				B878E8441B04230B006C804E /* QuartzCore.framework in Frameworks */,
+				B878E83D1B041260006C804E /* MapKit.framework in Frameworks */,
+				B878E8381B03FD10006C804E /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +86,10 @@
 		B878E8021B03F5D7006C804E = {
 			isa = PBXGroup;
 			children = (
+				B878E84D1B05459F006C804E /* libsqlite3.0.dylib */,
+				B878E8431B04230B006C804E /* QuartzCore.framework */,
+				B878E83C1B041260006C804E /* MapKit.framework */,
+				B878E8371B03FD10006C804E /* CoreLocation.framework */,
 				B878E80D1B03F5D8006C804E /* GeoFencing */,
 				B878E8271B03F5D8006C804E /* GeoFencingTests */,
 				B878E80C1B03F5D8006C804E /* Products */,
@@ -85,6 +112,12 @@
 				B878E8131B03F5D8006C804E /* AppDelegate.m */,
 				B878E8341B03F784006C804E /* setCoordinate.h */,
 				B878E8351B03F784006C804E /* setCoordinate.m */,
+				B878E84F1B0547C4006C804E /* History.h */,
+				B878E8501B0547C4006C804E /* History.m */,
+				B878E8391B040CF6006C804E /* checkCoord.h */,
+				B878E83A1B040CF6006C804E /* checkCoord.m */,
+				B878E84A1B052A98006C804E /* animatedCircle.h */,
+				B878E84B1B052A98006C804E /* animatedCircle.m */,
 				B878E8181B03F5D8006C804E /* Main.storyboard */,
 				B878E81B1B03F5D8006C804E /* Images.xcassets */,
 				B878E81D1B03F5D8006C804E /* LaunchScreen.xib */,
@@ -96,6 +129,7 @@
 		B878E80E1B03F5D8006C804E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B878E8481B0529F4006C804E /* redCircle.png */,
 				B878E80F1B03F5D8006C804E /* Info.plist */,
 				B878E8101B03F5D8006C804E /* main.m */,
 			);
@@ -200,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B878E81A1B03F5D8006C804E /* Main.storyboard in Resources */,
+				B878E8491B0529F4006C804E /* redCircle.png in Resources */,
 				B878E81F1B03F5D8006C804E /* LaunchScreen.xib in Resources */,
 				B878E81C1B03F5D8006C804E /* Images.xcassets in Resources */,
 			);
@@ -219,8 +254,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B878E83B1B040CF6006C804E /* checkCoord.m in Sources */,
 				B878E8141B03F5D8006C804E /* AppDelegate.m in Sources */,
+				B878E8511B0547C4006C804E /* History.m in Sources */,
 				B878E8361B03F784006C804E /* setCoordinate.m in Sources */,
+				B878E84C1B052A98006C804E /* animatedCircle.m in Sources */,
 				B878E8111B03F5D8006C804E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

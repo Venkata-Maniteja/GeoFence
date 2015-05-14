@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface setCoordinate : UIViewController
+@interface setCoordinate : UIViewController<CLLocationManagerDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *latitudeField;
+@property (weak, nonatomic) IBOutlet UITextField *longitudeField;
+
+@property (weak, nonatomic) IBOutlet UITextField *radiusField;
+- (IBAction)getCurrentLocation:(id)sender;
+- (IBAction)saveCoordinates:(id)sender;
 
 @end
