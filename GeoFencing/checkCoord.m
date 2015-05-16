@@ -29,31 +29,25 @@
 @synthesize myDatabase;
 @synthesize statusOfAddingToDB;
 
-
-
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do  setup after loading the view.
+    map.delegate=self;
+    
+    [self prepareDatabase];
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
     [self setLocationManager:[[CLLocationManager alloc] init]];
     [_locationManager requestAlwaysAuthorization];
     [_locationManager setDelegate:self];
     [_locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
     [_locationManager startUpdatingLocation];
     
-    map.delegate=self;
-   
-    [self prepareDatabase];
-    
-    
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    
     [map removeOverlays: map.overlays];
     [self addCircle];
-    
     
 }
 
@@ -65,15 +59,10 @@
     NSString *docsDir = dirPaths[0];
     
     // Build the path to the database file
-    
-    
     databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"GeoFencing.db"]];
     
     //  NSError *error = nil;
     //  [[NSFileManager defaultManager] removeItemAtPath:databasePath error:&error];
-    
-    
-    NSLog(@"DB Path: %@", databasePath);
     
     NSFileManager *filemgr = [NSFileManager defaultManager];
     
@@ -160,7 +149,6 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    
     NSUserDefaults *getCoords=[NSUserDefaults standardUserDefaults];
     float lon= [getCoords floatForKey:@"lat"];
     float lat=[getCoords floatForKey:@"long"];
@@ -171,10 +159,9 @@
     CLLocation *centerLocation = [[CLLocation alloc] initWithLatitude:lat
                                                             longitude:lon];
     
-    
-    
-    
     CLLocation *lastLocation=[locations lastObject];
+    
+    NSLog(@"last locations is %@",lastLocation);
     
     CLLocationDistance distance = [lastLocation distanceFromLocation:centerLocation];
     
@@ -184,61 +171,46 @@
         
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ALert" message:@"you entered the zone" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
         [alert show];
-        
-        sqlite3_stmt  *statement=NULL;
-        const char *dbpath = [databasePath UTF8String];
-        
-        if (sqlite3_open(dbpath, &myDatabase) == SQLITE_OK) {
-            //12,21
-         NSString  * insertSQL = [NSString stringWithFormat:@"INSERT INTO GEO_HIST (TIME_HIST) VALUES (\"%@\")",
-                         [NSDate date]];
-            
-            const char *insert_stmt = [insertSQL UTF8String];
-            sqlite3_prepare_v2(myDatabase, insert_stmt,
-                               -1, &statement, NULL);
-            if (sqlite3_step(statement) == SQLITE_DONE) {
-                NSLog(@"data inserted");
-            }
-            else{
-                NSLog(@"data not insertrd %s,",sqlite3_errmsg(myDatabase));
-            }
-            
-            sqlite3_finalize(statement);
-            sqlite3_close(myDatabase);
-        }
-        
+        [self save];
         
     }
     NSLog(@"locations are %@",locations);
-    //2
-    CLLocationAccuracy accuracy = [lastLocation horizontalAccuracy];
-  //  NSLog(@"Received location %@ with accuracy %f", lastLocation, accuracy);
     
-    //3
-    if(accuracy <=50) {   //metres
-        //4
-        
-        
-        // More code here
+    CLLocationAccuracy accuracy = [lastLocation horizontalAccuracy];
+    if(accuracy <=50) {   //accuracy in metres
         
         [manager stopUpdatingLocation];
     }
 }
 
 
-
-
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)save{
+    
+    sqlite3_stmt  *statement=NULL;
+    const char *dbpath = [databasePath UTF8String];
+    
+    if (sqlite3_open(dbpath, &myDatabase) == SQLITE_OK) {
+        //12,21
+        NSString  * insertSQL = [NSString stringWithFormat:@"INSERT INTO GEO_HIST (TIME_HIST) VALUES (\"%@\")",
+                                 [NSDate date]];
+        
+        const char *insert_stmt = [insertSQL UTF8String];
+        sqlite3_prepare_v2(myDatabase, insert_stmt,
+                           -1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            NSLog(@"data inserted");
+        }
+        else{
+            NSLog(@"data not insertrd %s,",sqlite3_errmsg(myDatabase));
+        }
+        
+        sqlite3_finalize(statement);
+        sqlite3_close(myDatabase);
+    }
+    
+    
 }
-*/
+
+
 
 @end

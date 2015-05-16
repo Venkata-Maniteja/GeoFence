@@ -128,18 +128,53 @@
 }
 */
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        
+        [self deleteFromDatabase:indexPath];
+        
+
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
 
+-(void)deleteFromDatabase:(NSIndexPath *)indexpath{
+    
+   
+    NSLog(@"db path %@",databasePath);
+
+    
+    const char *dbpath = [databasePath UTF8String];
+    sqlite3_stmt    *statement;
+    
+    if (sqlite3_open(dbpath, &myDatabase) == SQLITE_OK)
+    {
+        
+        NSLog(@"list items are %@",[list objectAtIndex:indexpath.row]);
+        NSString *querySQL = [NSString stringWithFormat:@"DELETE FROM \"geo_hist\" WHERE TIME_HIST='%@'",[list objectAtIndex:indexpath.row]];
+        
+        const char *query_stmt = [querySQL UTF8String];
+        
+        if (sqlite3_prepare_v2(myDatabase, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            NSLog(@"deleted");
+            [list removeObjectAtIndex:indexpath.row];
+                          NSLog(@"list count is %d",list.count);
+            
+            sqlite3_finalize(statement);
+        }
+        
+        sqlite3_close(myDatabase);
+    }
+    
+}
 /*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {

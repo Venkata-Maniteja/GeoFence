@@ -67,11 +67,27 @@
 
 - (IBAction)saveCoordinates:(id)sender{
     
+    //checking null fields
+    if ([_longitudeField.text isEqual:@""] || [_latitudeField.text isEqual:@""] || [_radiusField.text isEqual:@""]) {
+        
+        UIAlertView *empty=[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter all fields" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [empty show];
+    }else{
+    
+        //saving the text field data into User Defaults with specific key for each
     NSUserDefaults *saveCoords=[NSUserDefaults standardUserDefaults];
     [saveCoords setObject:[NSNumber numberWithFloat:[[_latitudeField text]doubleValue]] forKey:@"lat"];
     [saveCoords setObject:[NSNumber numberWithFloat:[[_longitudeField text]doubleValue]] forKey:@"long"];
     [saveCoords setObject:[NSNumber numberWithFloat:[[_radiusField text]doubleValue]] forKey:@"rad"];
-    
+        
+        //clearing the text fields
+        _latitudeField.text=@"";
+        _longitudeField.text=@"";
+        _radiusField.text=@"";
+        
+        UIAlertView *save=[[UIAlertView alloc]initWithTitle:@"Saved!!" message:@"Coordinates entered are saved" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [save show];
+    }
     
 }
 
