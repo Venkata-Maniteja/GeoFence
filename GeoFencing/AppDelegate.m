@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "FMDatabase.h"
+#import "FMResultSet.h"
 
 @interface AppDelegate ()
 
@@ -14,9 +16,39 @@
 
 @implementation AppDelegate
 
+-(NSString *)dataBasePath{
+    
+    // Get the documents directory
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = dirPaths[0];
+    
+    // Build the path to the database file
+   
+    NSString *databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"GeoFence.db"]];
+    
+  //  NSError *error = nil;
+  //  [[NSFileManager defaultManager] removeItemAtPath:databasePath error:&error];
+    
+    
+    
+    NSLog(@"DB Path: %@", databasePath);
+    
+    return databasePath;
+    
+    
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:[self dataBasePath]];
+    
+    [db open];
+    
+    [db executeUpdate:@"CREATE TABLE IF NOT EXISTS GEO_HIST (TIME_HIST TEXT )"];
+    
+    [db close];
+    
     return YES;
 }
 

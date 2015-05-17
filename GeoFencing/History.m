@@ -7,88 +7,77 @@
 //
 
 #import "History.h"
-#import <sqlite3.h>
+#import "FMResultSet.h"
+#import "FMDatabase.h"
 
 @interface History ()
 
-@property (strong, nonatomic) NSString *databasePath;
-@property (nonatomic) sqlite3 *myDatabase;
 @property (nonatomic,strong) NSMutableArray *list;
+@property (nonatomic,strong) FMDatabase *db;
 
 
 @end
 
 @implementation History
 
-@synthesize databasePath,myDatabase,list;
+@synthesize list,db;
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+
     list=[[NSMutableArray alloc]init];
+    db = [FMDatabase databaseWithPath:[self dataBasePath]];
     
-    [self getData];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    [db open];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    FMResultSet *rs = [db executeQuery:@"SELECT * FROM GEO_HIST"];
+    
+    if (!rs) {
+        NSLog(@"%s: executeQuery failed: %@", __FUNCTION__, [db lastErrorMessage]);
+        return;
+    }
+    
+    while ([rs next]) {
+        NSString *fieldDatainDB = [rs stringForColumn:@"TIME_HIST"];
+        NSLog(@"time stamp = %@", fieldDatainDB);
+        [list addObject:fieldDatainDB];
+    } //else {
+    //        NSLog(@"%s: No record found", __FUNCTION__);
+    //    }
+    
+    [rs close];
+    [db close];
+
+    
 }
 
--(void)getData{
-    
-    NSString *docsDir;
-    NSArray *dirPaths;
+
+
+-(NSString *) dataBasePath{
     
     // Get the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = dirPaths[0];
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = dirPaths[0];
     
     // Build the path to the database file
     
-    databasePath = [[NSString alloc]
-                    initWithString: [docsDir stringByAppendingPathComponent:
-                                     @"GeoFencing.db"]];
+    NSString *databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"GeoFence.db"]];
+    
+    //  NSError *error = nil;
+    // [[NSFileManager defaultManager] removeItemAtPath:databasePath error:&error];
     
     
-    NSLog(@"db path %@",databasePath);
     
-    const char *dbpath = [databasePath UTF8String];
-    sqlite3_stmt    *statement;
+    NSLog(@"DB Path: %@", databasePath);
     
-    if (sqlite3_open(dbpath, &myDatabase) == SQLITE_OK)
-    {
-        
-        
-        NSString *querySQL = @"SELECT * FROM GEO_HIST";
-        
-        const char *query_stmt = [querySQL UTF8String];
-        
-        if (sqlite3_prepare_v2(myDatabase, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-        {
-            [list removeAllObjects];
-            while (sqlite3_step(statement) == SQLITE_ROW)
-            {
-                
-                NSString *allTimeData = [[NSString alloc]
-                                          initWithUTF8String:
-                                          (const char *) sqlite3_column_text(
-                                                                             statement, 0)];
-                
-               
-                
-                [list addObject:allTimeData];
-                
-            }
-            sqlite3_finalize(statement);
-        }
-        
-        sqlite3_close(myDatabase);
-    }
+    return databasePath;
     
-
+    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -98,13 +87,11 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return list.count;
 }
@@ -135,10 +122,10 @@
         // Delete the row from the data source
         
         [self deleteFromDatabase:indexPath];
-        
+        [list removeObjectAtIndex:indexPath.row];
 
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
+        [self.tableView reloadData];
         
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -147,32 +134,10 @@
 
 -(void)deleteFromDatabase:(NSIndexPath *)indexpath{
     
+    [db open];
+    [db executeUpdate:@"DELETE FROM GEO_HIST WHERE TIME_HIST =(?)",[list objectAtIndex:indexpath.row]];
+    [db close];
    
-    NSLog(@"db path %@",databasePath);
-
-    
-    const char *dbpath = [databasePath UTF8String];
-    sqlite3_stmt    *statement;
-    
-    if (sqlite3_open(dbpath, &myDatabase) == SQLITE_OK)
-    {
-        
-        NSLog(@"list items are %@",[list objectAtIndex:indexpath.row]);
-        NSString *querySQL = [NSString stringWithFormat:@"DELETE FROM \"geo_hist\" WHERE TIME_HIST='%@'",[list objectAtIndex:indexpath.row]];
-        
-        const char *query_stmt = [querySQL UTF8String];
-        
-        if (sqlite3_prepare_v2(myDatabase, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-        {
-            NSLog(@"deleted");
-            [list removeObjectAtIndex:indexpath.row];
-                          NSLog(@"list count is %d",list.count);
-            
-            sqlite3_finalize(statement);
-        }
-        
-        sqlite3_close(myDatabase);
-    }
     
 }
 /*

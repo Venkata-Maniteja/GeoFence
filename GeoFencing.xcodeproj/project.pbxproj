@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B8752F011B07FD55001D5D72 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B8752EFE1B07FD55001D5D72 /* FMDatabase.m */; };
+		B8752F021B07FD55001D5D72 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = B8752F001B07FD55001D5D72 /* FMResultSet.m */; };
+		B8752F081B094D4F001D5D72 /* geo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B8752F071B094D4F001D5D72 /* geo_icon.png */; };
+		B8752F0A1B094D89001D5D72 /* setup.png in Resources */ = {isa = PBXBuildFile; fileRef = B8752F091B094D89001D5D72 /* setup.png */; };
+		B8752F0C1B094DCD001D5D72 /* list_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B8752F0B1B094DCD001D5D72 /* list_icon.png */; };
 		B878E8111B03F5D8006C804E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B878E8101B03F5D8006C804E /* main.m */; };
 		B878E8141B03F5D8006C804E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B878E8131B03F5D8006C804E /* AppDelegate.m */; };
 		B878E81A1B03F5D8006C804E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B878E8181B03F5D8006C804E /* Main.storyboard */; };
@@ -35,6 +40,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B8752EFD1B07FD55001D5D72 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		B8752EFE1B07FD55001D5D72 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		B8752EFF1B07FD55001D5D72 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		B8752F001B07FD55001D5D72 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		B8752F071B094D4F001D5D72 /* geo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = geo_icon.png; sourceTree = "<group>"; };
+		B8752F091B094D89001D5D72 /* setup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setup.png; sourceTree = "<group>"; };
+		B8752F0B1B094DCD001D5D72 /* list_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_icon.png; sourceTree = "<group>"; };
 		B878E80B1B03F5D8006C804E /* GeoFencing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoFencing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B878E80F1B03F5D8006C804E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B878E8101B03F5D8006C804E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -83,6 +95,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B8752F031B080C2D001D5D72 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				B878E8341B03F784006C804E /* setCoordinate.h */,
+				B878E8351B03F784006C804E /* setCoordinate.m */,
+				B878E84F1B0547C4006C804E /* History.h */,
+				B878E8501B0547C4006C804E /* History.m */,
+				B878E8391B040CF6006C804E /* checkCoord.h */,
+				B878E83A1B040CF6006C804E /* checkCoord.m */,
+			);
+			name = Tabs;
+			sourceTree = "<group>";
+		};
+		B8752F041B080C46001D5D72 /* DB Helper */ = {
+			isa = PBXGroup;
+			children = (
+				B8752EFD1B07FD55001D5D72 /* FMDatabase.h */,
+				B8752EFE1B07FD55001D5D72 /* FMDatabase.m */,
+				B8752EFF1B07FD55001D5D72 /* FMResultSet.h */,
+				B8752F001B07FD55001D5D72 /* FMResultSet.m */,
+			);
+			name = "DB Helper";
+			sourceTree = "<group>";
+		};
 		B878E8021B03F5D7006C804E = {
 			isa = PBXGroup;
 			children = (
@@ -110,17 +146,11 @@
 			children = (
 				B878E8121B03F5D8006C804E /* AppDelegate.h */,
 				B878E8131B03F5D8006C804E /* AppDelegate.m */,
-				B878E8341B03F784006C804E /* setCoordinate.h */,
-				B878E8351B03F784006C804E /* setCoordinate.m */,
-				B878E84F1B0547C4006C804E /* History.h */,
-				B878E8501B0547C4006C804E /* History.m */,
-				B878E8391B040CF6006C804E /* checkCoord.h */,
-				B878E83A1B040CF6006C804E /* checkCoord.m */,
-				B878E84A1B052A98006C804E /* animatedCircle.h */,
-				B878E84B1B052A98006C804E /* animatedCircle.m */,
+				B8752F031B080C2D001D5D72 /* Tabs */,
+				B8752F041B080C46001D5D72 /* DB Helper */,
 				B878E8181B03F5D8006C804E /* Main.storyboard */,
-				B878E81B1B03F5D8006C804E /* Images.xcassets */,
 				B878E81D1B03F5D8006C804E /* LaunchScreen.xib */,
+				B878E81B1B03F5D8006C804E /* Images.xcassets */,
 				B878E80E1B03F5D8006C804E /* Supporting Files */,
 			);
 			path = GeoFencing;
@@ -129,6 +159,11 @@
 		B878E80E1B03F5D8006C804E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B8752F071B094D4F001D5D72 /* geo_icon.png */,
+				B8752F091B094D89001D5D72 /* setup.png */,
+				B8752F0B1B094DCD001D5D72 /* list_icon.png */,
+				B878E84A1B052A98006C804E /* animatedCircle.h */,
+				B878E84B1B052A98006C804E /* animatedCircle.m */,
 				B878E8481B0529F4006C804E /* redCircle.png */,
 				B878E80F1B03F5D8006C804E /* Info.plist */,
 				B878E8101B03F5D8006C804E /* main.m */,
@@ -234,9 +269,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B878E81A1B03F5D8006C804E /* Main.storyboard in Resources */,
+				B8752F0C1B094DCD001D5D72 /* list_icon.png in Resources */,
+				B8752F0A1B094D89001D5D72 /* setup.png in Resources */,
 				B878E8491B0529F4006C804E /* redCircle.png in Resources */,
 				B878E81F1B03F5D8006C804E /* LaunchScreen.xib in Resources */,
 				B878E81C1B03F5D8006C804E /* Images.xcassets in Resources */,
+				B8752F081B094D4F001D5D72 /* geo_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +297,9 @@
 				B878E8511B0547C4006C804E /* History.m in Sources */,
 				B878E8361B03F784006C804E /* setCoordinate.m in Sources */,
 				B878E84C1B052A98006C804E /* animatedCircle.m in Sources */,
+				B8752F021B07FD55001D5D72 /* FMResultSet.m in Sources */,
 				B878E8111B03F5D8006C804E /* main.m in Sources */,
+				B8752F011B07FD55001D5D72 /* FMDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +494,7 @@
 				B878E8301B03F5D8006C804E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B878E8311B03F5D8006C804E /* Build configuration list for PBXNativeTarget "GeoFencingTests" */ = {
 			isa = XCConfigurationList;
@@ -462,6 +503,7 @@
 				B878E8331B03F5D8006C804E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

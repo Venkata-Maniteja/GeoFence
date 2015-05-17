@@ -96,26 +96,31 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Check" id="V6W-7R-jY8"/>
+                    <tabBarItem key="tabBarItem" title="Check" image="geo_icon.png" id="V6W-7R-jY8"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="currentLat" destination="Ssd-qr-tV1" id="PLe-jm-4BU"/>
+                        <outlet property="currentLon" destination="nzd-1V-t0g" id="d9x-FV-uCq"/>
+                        <outlet property="dist" destination="lqv-sk-mKM" id="0zT-GF-CUk"/>
                         <outlet property="map" destination="dZt-aK-xgT" id="jaT-I0-ixe"/>
+                        <outlet property="savedLat" destination="GRC-pY-ATp" id="pXz-ln-MmO"/>
+                        <outlet property="savedLon" destination="i11-18-90k" id="Rrs-We-veL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qrN-sW-5hN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="302" y="320"/>
+            <point key="canvasLocation" x="514" y="296"/>
         </scene>
         <!--History-->
         <scene sceneID="ncQ-6K-FWW">
             <objects>
                 <tableViewController id="dvY-4R-E41" customClass="History" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5he-WZ-bMf">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" id="5he-WZ-bMf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="History" id="6A8-Z8-c1O">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationLevel="2" indentationWidth="10" reuseIdentifier="History" rowHeight="62" id="6A8-Z8-c1O">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6A8-Z8-c1O" id="zoT-PS-b9o">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -127,12 +132,12 @@
                             <outlet property="delegate" destination="dvY-4R-E41" id="sb9-h9-a5a"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="History" id="OWW-On-MpS"/>
+                    <tabBarItem key="tabBarItem" title="History" image="list_icon.png" id="OWW-On-MpS"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZz-wE-Bpo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-76" y="725"/>
+            <point key="canvasLocation" x="4" y="725"/>
         </scene>
         <!--Set-->
         <scene sceneID="9sc-bR-Cxs">
@@ -182,7 +187,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Set" id="QbE-0g-Fl3"/>
+                    <tabBarItem key="tabBarItem" title="Set" image="setup.png" id="QbE-0g-Fl3"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="latitudeField" destination="9mb-Se-2LD" id="25p-RN-Jdi"/>
@@ -216,4 +221,9 @@
             <point key="canvasLocation" x="-518" y="-11"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="geo_icon.png" width="30" height="30"/>
+        <image name="list_icon.png" width="30" height="30"/>
+        <image name="setup.png" width="30" height="30"/>
+    </resources>
 </document>

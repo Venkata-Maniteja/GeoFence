@@ -9,32 +9,56 @@
 #import "checkCoord.h"
 #import <CoreLocation/CoreLocation.h>
 #import "animatedCircle.h"
-#import <sqlite3.h>
+#import "FMResultSet.h"
+#import "FMDatabase.h"
 
 
 
 
 @interface checkCoord ()<CLLocationManagerDelegate>
+
 @property (nonatomic, strong) CLLocationManager *locationManager;
-@property (strong, nonatomic) NSString *databasePath;
 @property (nonatomic) sqlite3 *myDatabase;
 @property (strong, nonatomic) NSString *statusOfAddingToDB;
+@property (assign) float saved_lat;
+@property (assign) float saved_lon;
+@property (assign) float saved_rad;
+
+@property (nonatomic,strong) IBOutlet UILabel *savedLat;
+@property (nonatomic,strong) IBOutlet UILabel *savedLon;
+@property (nonatomic,strong) IBOutlet UILabel *currentLat;
+@property (nonatomic,strong) IBOutlet UILabel *currentLon;
+@property (nonatomic,strong) IBOutlet UILabel *dist;
+
+
+
+
 
 
 @end
 
 @implementation checkCoord
 
-@synthesize databasePath;
 @synthesize myDatabase;
 @synthesize statusOfAddingToDB;
+@synthesize saved_lat,saved_lon,saved_rad;
+@synthesize savedLat,savedLon,currentLat,currentLon,dist;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do  setup after loading the view.
     map.delegate=self;
     
-    [self prepareDatabase];
+    NSUserDefaults *getCoords=[NSUserDefaults standardUserDefaults];
+    saved_lat= [getCoords floatForKey:@"long"];
+    saved_lon=[getCoords floatForKey:@"lat"];
+    saved_rad=[getCoords floatForKey:@"rad"];
+   
+    savedLat.text=[NSString stringWithFormat:@"%f",saved_lat];
+    savedLon.text=[NSString stringWithFormat:@"%f",saved_lon];
+    
+    
+    
     
 }
 
@@ -51,48 +75,28 @@
     
 }
 
-- (void)prepareDatabase
-{
+
+-(NSString *)dataBasePath{
     
     // Get the documents directory
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = dirPaths[0];
     
     // Build the path to the database file
-    databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"GeoFencing.db"]];
+    
+    
+    NSString *databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"GeoFence.db"]];
     
     //  NSError *error = nil;
-    //  [[NSFileManager defaultManager] removeItemAtPath:databasePath error:&error];
+    // [[NSFileManager defaultManager] removeItemAtPath:databasePath error:&error];
     
-    NSFileManager *filemgr = [NSFileManager defaultManager];
     
-    if ([filemgr fileExistsAtPath: databasePath ] == NO)
-    {
-        const char *dbpath = [databasePath UTF8String];
-        if (sqlite3_open(dbpath, &myDatabase) == SQLITE_OK) {
-            char *errMsg;
-            
-            const char *sql_stmt ="CREATE TABLE IF NOT EXISTS GEO_HIST (TIME_HIST TEXT )";
-            if (sqlite3_exec(myDatabase, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
-                statusOfAddingToDB = @"Failed to create table";
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"DB Status" message:statusOfAddingToDB delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alert show];
-            } else {
-                
-                statusOfAddingToDB = @"Success in creating table";
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"DB Status" message:statusOfAddingToDB delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alert show];
-            }
-            
-            sqlite3_close(myDatabase);
-        } else {
-            statusOfAddingToDB = @"Failed to open/create database";
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"DB Status" message:statusOfAddingToDB delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-        }
-    }
+   // NSLog(@"DB Path: %@", databasePath);
+    
+    return databasePath;
+    
+    
 }
-
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
     
@@ -105,14 +109,9 @@
 -(void)addCircle{
     
     CLLocationCoordinate2D location;
-    NSUserDefaults *getCoords=[NSUserDefaults standardUserDefaults];
-    float lon= [getCoords floatForKey:@"lat"];
-    float lat=[getCoords floatForKey:@"long"];
-    float rad=[getCoords floatForKey:@"rad"];
-    NSLog(@"lat and long are %f %f",lat,lon);
     
-    location.latitude = lat;
-    location.longitude = lon;  //use constants here
+    location.latitude = saved_lat;
+    location.longitude = saved_lon;  //use constants here
     
     //add annotation
     MKPointAnnotation *anno = [[MKPointAnnotation alloc] init];
@@ -120,10 +119,10 @@
     [map addAnnotation:anno];
     
     //add overlay
-    [map addOverlay:[MKCircle circleWithCenterCoordinate:location radius:rad]];
+    [map addOverlay:[MKCircle circleWithCenterCoordinate:location radius:saved_rad]];
     
     //zoom into the location with the defined circle at the middle
-    [self zoomInto:location distance:(rad * 4.0) animated:YES];
+    [self zoomInto:location distance:(saved_rad * 4.0) animated:YES];
 }
 
 
@@ -163,53 +162,49 @@
     
     NSLog(@"last locations is %@",lastLocation);
     
+    
+    currentLat.text=[NSString stringWithFormat:@"%f",lastLocation.coordinate.latitude];
+    currentLon.text=[NSString stringWithFormat:@"%f",lastLocation.coordinate.longitude];
+    
     CLLocationDistance distance = [lastLocation distanceFromLocation:centerLocation];
+    
+    NSLog(@"distance is %f",distance);
+    
+  //  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDown:) userInfo:nil repeats:YES];
+
+    dist.text=[NSString stringWithFormat:@"%f",distance];
     
     NSLog(@"distance is %f",distance);
     
     if (distance<=rad) {
         
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ALert" message:@"you entered the zone" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ALert" message:@"you entered the restrictted zone" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
         [alert show];
-        [self save];
+        
+        NSString *currentDate=[NSString stringWithFormat:@"%@",[NSDate date]];
+       
+        FMDatabase *db = [FMDatabase databaseWithPath:[self dataBasePath]];
+        [db open];
+        [db executeUpdate:@"INSERT INTO GEO_HIST (TIME_HIST) VALUES (?)",currentDate,nil];
+        [db close];
+        
+        
+//        NSString *phoneNumber = @"1-800-555-1212"; // dynamically assigned
+//        NSString *phoneURLString = [NSString stringWithFormat:@"tel:%@", phoneNumber];
+//        NSURL *phoneURL = [NSURL URLWithString:phoneURLString];
+//        [[UIApplication sharedApplication] openURL:phoneURL];
+
         
     }
     NSLog(@"locations are %@",locations);
     
     CLLocationAccuracy accuracy = [lastLocation horizontalAccuracy];
-    if(accuracy <=50) {   //accuracy in metres
+    if(accuracy <=5) {   //accuracy in metres
         
         [manager stopUpdatingLocation];
     }
 }
 
-
--(void)save{
-    
-    sqlite3_stmt  *statement=NULL;
-    const char *dbpath = [databasePath UTF8String];
-    
-    if (sqlite3_open(dbpath, &myDatabase) == SQLITE_OK) {
-        //12,21
-        NSString  * insertSQL = [NSString stringWithFormat:@"INSERT INTO GEO_HIST (TIME_HIST) VALUES (\"%@\")",
-                                 [NSDate date]];
-        
-        const char *insert_stmt = [insertSQL UTF8String];
-        sqlite3_prepare_v2(myDatabase, insert_stmt,
-                           -1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE) {
-            NSLog(@"data inserted");
-        }
-        else{
-            NSLog(@"data not insertrd %s,",sqlite3_errmsg(myDatabase));
-        }
-        
-        sqlite3_finalize(statement);
-        sqlite3_close(myDatabase);
-    }
-    
-    
-}
 
 
 
