@@ -71,6 +71,8 @@
     [_locationManager startUpdatingLocation];
     
     [map removeOverlays: map.overlays];
+    
+    
     [self addCircle];
     
 }
@@ -118,11 +120,17 @@
     anno.coordinate = location;
     [map addAnnotation:anno];
     
-    //add overlay
-    [map addOverlay:[MKCircle circleWithCenterCoordinate:location radius:saved_rad]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        //add overlay
+        [map addOverlay:[MKCircle circleWithCenterCoordinate:location radius:saved_rad]];
+        
+        //zoom into the location with the defined circle at the middle
+        [self zoomInto:location distance:(saved_rad * 4.0) animated:YES];
+        
+    });
     
-    //zoom into the location with the defined circle at the middle
-    [self zoomInto:location distance:(saved_rad * 4.0) animated:YES];
+    
 }
 
 
@@ -143,6 +151,9 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+   
+    
 }
 
 
@@ -152,29 +163,19 @@
     float lon= [getCoords floatForKey:@"lat"];
     float lat=[getCoords floatForKey:@"long"];
     float rad=[getCoords floatForKey:@"rad"];
-    NSLog(@"lat and long are %f %f",lat,lon);
-    
     
     CLLocation *centerLocation = [[CLLocation alloc] initWithLatitude:lat
                                                             longitude:lon];
     
     CLLocation *lastLocation=[locations lastObject];
     
-    NSLog(@"last locations is %@",lastLocation);
-    
-    
+    //display current lat and lon in text fields
     currentLat.text=[NSString stringWithFormat:@"%f",lastLocation.coordinate.latitude];
     currentLon.text=[NSString stringWithFormat:@"%f",lastLocation.coordinate.longitude];
     
     CLLocationDistance distance = [lastLocation distanceFromLocation:centerLocation];
-    
-    NSLog(@"distance is %f",distance);
-    
-  //  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDown:) userInfo:nil repeats:YES];
-
+  
     dist.text=[NSString stringWithFormat:@"%f",distance];
-    
-    NSLog(@"distance is %f",distance);
     
     if (distance<=rad) {
         
@@ -182,24 +183,17 @@
         [alert show];
         
         NSString *currentDate=[NSString stringWithFormat:@"%@",[NSDate date]];
-       
+        
+       //save the current timestamp into database
         FMDatabase *db = [FMDatabase databaseWithPath:[self dataBasePath]];
         [db open];
         [db executeUpdate:@"INSERT INTO GEO_HIST (TIME_HIST) VALUES (?)",currentDate,nil];
         [db close];
         
-        
-//        NSString *phoneNumber = @"1-800-555-1212"; // dynamically assigned
-//        NSString *phoneURLString = [NSString stringWithFormat:@"tel:%@", phoneNumber];
-//        NSURL *phoneURL = [NSURL URLWithString:phoneURLString];
-//        [[UIApplication sharedApplication] openURL:phoneURL];
-
-        
     }
-    NSLog(@"locations are %@",locations);
     
     CLLocationAccuracy accuracy = [lastLocation horizontalAccuracy];
-    if(accuracy <=5) {   //accuracy in metres
+    if(accuracy <=10) {   //accuracy in metres
         
         [manager stopUpdatingLocation];
     }

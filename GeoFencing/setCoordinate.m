@@ -27,7 +27,8 @@
      self.latitudeField.delegate = self;
      self.longitudeField.delegate = self;
      self.radiusField.delegate = self;
-   
+    
+    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"lat"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"long"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"rad"];
@@ -44,6 +45,28 @@
 }
 
 - (IBAction)getCurrentLocation:(id)sender {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"This is title"
+                                                                   message:@"This is message"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+        textField.placeholder = @"I am a placeholder";
+        
+    }];
+    
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Submit"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:nil];
+    
+    [alert addAction:okAction];
+    
+    
+    [self presentViewController:alert animated:YES completion:nil];
+
     
     //requesting the permission and getting current coordinates
     
@@ -63,6 +86,11 @@
     NSLog(@"float valus are %f",[[_latitudeField text]doubleValue]);
     
     
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+
+
 }
 
 - (IBAction)saveCoordinates:(id)sender{

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B80581F31BD52D7C00252C4B /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B80581F21BD52D7C00252C4B /* libsqlite3.0.tbd */; };
 		B8752F011B07FD55001D5D72 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B8752EFE1B07FD55001D5D72 /* FMDatabase.m */; };
 		B8752F021B07FD55001D5D72 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = B8752F001B07FD55001D5D72 /* FMResultSet.m */; };
 		B8752F081B094D4F001D5D72 /* geo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B8752F071B094D4F001D5D72 /* geo_icon.png */; };
@@ -25,7 +26,6 @@
 		B878E8441B04230B006C804E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B878E8431B04230B006C804E /* QuartzCore.framework */; };
 		B878E8491B0529F4006C804E /* redCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = B878E8481B0529F4006C804E /* redCircle.png */; };
 		B878E84C1B052A98006C804E /* animatedCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = B878E84B1B052A98006C804E /* animatedCircle.m */; };
-		B878E84E1B05459F006C804E /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B878E84D1B05459F006C804E /* libsqlite3.0.dylib */; };
 		B878E8511B0547C4006C804E /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = B878E8501B0547C4006C804E /* History.m */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B80581F21BD52D7C00252C4B /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		B8752EFD1B07FD55001D5D72 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		B8752EFE1B07FD55001D5D72 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		B8752EFF1B07FD55001D5D72 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
@@ -68,7 +69,6 @@
 		B878E8481B0529F4006C804E /* redCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redCircle.png; sourceTree = "<group>"; };
 		B878E84A1B052A98006C804E /* animatedCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animatedCircle.h; sourceTree = "<group>"; };
 		B878E84B1B052A98006C804E /* animatedCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = animatedCircle.m; sourceTree = "<group>"; };
-		B878E84D1B05459F006C804E /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		B878E84F1B0547C4006C804E /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		B878E8501B0547C4006C804E /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B878E84E1B05459F006C804E /* libsqlite3.0.dylib in Frameworks */,
+				B80581F31BD52D7C00252C4B /* libsqlite3.0.tbd in Frameworks */,
 				B878E8441B04230B006C804E /* QuartzCore.framework in Frameworks */,
 				B878E83D1B041260006C804E /* MapKit.framework in Frameworks */,
 				B878E8381B03FD10006C804E /* CoreLocation.framework in Frameworks */,
@@ -122,7 +122,7 @@
 		B878E8021B03F5D7006C804E = {
 			isa = PBXGroup;
 			children = (
-				B878E84D1B05459F006C804E /* libsqlite3.0.dylib */,
+				B80581F21BD52D7C00252C4B /* libsqlite3.0.tbd */,
 				B878E8431B04230B006C804E /* QuartzCore.framework */,
 				B878E83C1B041260006C804E /* MapKit.framework */,
 				B878E8371B03FD10006C804E /* CoreLocation.framework */,
@@ -232,7 +232,7 @@
 		B878E8031B03F5D8006C804E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Venkata Maniteja";
 				TargetAttributes = {
 					B878E80A1B03F5D8006C804E = {
@@ -362,6 +362,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -425,8 +426,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					/Users/VenkataManiteja/Documents/FacebookSDK,
+				);
 				INFOPLIST_FILE = GeoFencing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "VenkataManiteja.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -435,8 +443,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					/Users/VenkataManiteja/Documents/FacebookSDK,
+				);
 				INFOPLIST_FILE = GeoFencing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "VenkataManiteja.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -455,6 +470,7 @@
 				);
 				INFOPLIST_FILE = GeoFencingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "VenkataManiteja.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GeoFencing.app/GeoFencing";
 			};
@@ -470,6 +486,7 @@
 				);
 				INFOPLIST_FILE = GeoFencingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "VenkataManiteja.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GeoFencing.app/GeoFencing";
 			};
